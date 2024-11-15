@@ -3,12 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Vyr Protocol</title>
+  <title>The Vyr Protocol - Redirecting</title>
   <style>
-    :root {
-      --text-scale: 1.2; /* This is your control variable - increase or decrease to scale all text */
-    }
-    
     * {
       margin: 0;
       padding: 0;
@@ -27,33 +23,47 @@
       position: relative;
     }
     
-    .corner-text {
+    .redirect-message {
       position: absolute;
-      font-size: calc(22px * var(--text-scale));
+      top: 40px;
+      left: 40px;
+      font-size: 22px;
       z-index: 2;
     }
     
-    .top-left {
-      top: 40px;
-      left: 40px;
-    }
-    
-    .bottom-left {
+    .new-url {
+      position: absolute;
       bottom: 80px;
       left: 40px;
+      font-size: 22px;
+      z-index: 2;
     }
     
-    .top-right {
+    .timer-container {
+      position: absolute;
       top: 40px;
       right: 80px;
-      font-size: calc(22px * var(--text-scale));
+      text-align: right;
+      z-index: 2;
     }
     
-    .bottom-right {
+    .countdown {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    
+    .redirect-now {
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    .status {
+      position: absolute;
       bottom: 40px;
       right: 40px;
-      width: calc(350px * var(--text-scale));
-      font-size: calc(12px * var(--text-scale));
+      width: 350px;
+      font-size: 12px;
+      z-index: 2;
     }
     
     .center-image {
@@ -70,47 +80,54 @@
     a {
       color: white;
       text-decoration: none;
-      display: block;
-      margin-top: calc(10px * var(--text-scale));
-      font-size: calc(20px * var(--text-scale));
     }
     
     a:hover {
       text-decoration: underline;
     }
-    
-    .additional-links {
-      position: absolute;
-      left: 40px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 2;
-    }
-    
-    .additional-links a {
-      margin-bottom: calc(15px * var(--text-scale));
-    }
-    
-    .additional-links a:last-child {
-      margin-bottom: 0;
-    }
   </style>
 </head>
 <body>
-  <div class="corner-text top-left">
-    The Vyr protocol
+  <div class="redirect-message">The Vyr Protocol has moved</div>
+  <div class="new-url">
+    <a href="https://vlngrad.github.io/vyr" id="redirect-link">https://vlngrad.github.io/vyr</a>
   </div>
-  <div class="corner-text bottom-left">/ˈwʌɪə/</div>
-  <a href="https://x.com/aftrwks" target="_blank" class="corner-text top-right">@AftrWks</a>
-  <div class="corner-text bottom-right">
-    Alice generates a proof of ownership by creating a unique state transformation based on her private key and the asset's initial state (its hash). This transformation is one-way, meaning that Bob can verify it but cannot reverse it to learn Alice's private key.
+  <div class="timer-container">
+    <div class="countdown" id="countdown">Redirecting in 10...</div>
+    <a href="#" class="redirect-now" id="redirect-now">redirect now</a>
   </div>
-  <div class="additional-links">
-    <a href="https://github.com/aftrwk" target="_blank">Build on Vyr</a>
-    <a href="https://aftrwk.github.io/vyrLitepaper" target="_blank">Read Litepaper</a>
-    <a href="https://aftrwk.github.io/vyrPitch" target="_blank">View the Pitch</a>
-    <a href="https://aftrwk.github.io/vyrPitch" target="_blank">Learn More</a>
-  </div>
-  <img src="https://cdn.glitch.me/0846f6ac-90cd-4f0b-a9e6-783892332eac/Untitled%20design%20(3).gif?v=1731414510250" alt="Center Image" class="center-image" loop>
+  <div class="status">Upgrading to a new implementation. All existing functionalities and documentation have been migrated to the new location.</div>
+  
+  <img src="https://cdn.glitch.me/0846f6ac-90cd-4f0b-a9e6-783892332eac/Untitled%20design%20(3).gif?v=1731414510250" alt="Vyr Protocol Animation" class="center-image">
+  
+  <script>
+    let timeLeft = 10;
+    const countdownElement = document.getElementById('countdown');
+    
+    const redirect = () => {
+      window.location.href = 'https://vlngrad.github.io/vyr';
+    };
+    
+    const countdown = setInterval(() => {
+      timeLeft--;
+      countdownElement.textContent = `Redirecting in ${timeLeft}...`;
+      
+      if (timeLeft <= 0) {
+        clearInterval(countdown);
+        redirect();
+      }
+    }, 1000);
+    
+    // Allow click to redirect immediately
+    document.getElementById('redirect-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      redirect();
+    });
+    
+    document.getElementById('redirect-now').addEventListener('click', (e) => {
+      e.preventDefault();
+      redirect();
+    });
+  </script>
 </body>
 </html>
